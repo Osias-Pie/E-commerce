@@ -18,3 +18,23 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/produits', function () {
+    return 'Page Produits';
+});
+
+Route::get('/panier', function () {
+    return 'Page Panier';
+});
+
+Route::get('/contact', function () {
+    return 'Page Contact';
+});
+
+Route::get('/admin', function () {
+    return 'Page Admin';
+});
