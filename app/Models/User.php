@@ -45,4 +45,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function orders ()
+{
+    return $this->hasMany(Order::class);
+    // Un utilisateur peut passer plusieurs commandes
 }
+    public function orderItems()
+{
+    return $this->hasMany(OrderItem::class);
+    // Un produit peut apparaître dans plusieurs commandes
+}
+
+}
+
