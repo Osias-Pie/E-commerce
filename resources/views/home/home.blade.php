@@ -22,8 +22,8 @@ const cartCount = ref(0)
 
   <!-- Navigation -->
   <nav class="space-x-6 text-sm font-medium text-black">
-    <a href="#" class="hover:text-[#f99d20] transition-colors duration-200">Accueil</a>
-    <a href="#" class="hover:text-[#f99d20] transition-colors duration-200">Catalogues</a>
+    <a href="" class="hover:text-[#f99d20] transition-colors duration-200">Accueil</a>
+    <a href="" class="hover:text-[#f99d20] transition-colors duration-200">Catalogues</a>
     <a href="#" class="hover:text-[#f99d20] transition-colors duration-200">Produits</a>
     <a href="#" class="hover:text-[#f99d20] transition-colors duration-200">Nouveautés</a>
     <a href="#" class="hover:text-[#f99d20] transition-colors duration-200">Contact</a>
@@ -63,7 +63,6 @@ const cartCount = ref(0)
     </div>
   </div>
 </header>
-
 <!-- BANNIÈRE -->
 <section class="py-16 text-center text-white bg-gradient-to-r from-purple-500 to-indigo-600">
   <h1 class="mb-2 text-4xl font-bold">Bienvenue sur StyleHub</h1>
