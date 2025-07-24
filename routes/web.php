@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 Route::get('/home', function () {
     return view('home');
@@ -39,3 +40,6 @@ Route::get('/contact', function () {
 Route::get('/admin', function () {
     return 'Page Admin';
 });
+
+Route::get('/catalogue', [ProductController::class, 'catalogue'])->name('catalogue');
+
