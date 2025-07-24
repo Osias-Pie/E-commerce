@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
   <meta charset="UTF-8">
-  <title>Accueil</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="font-sans text-gray-800 bg-gray-100">
+<body>
 
+    {{-- Tous nos contenus sont ici. --}}
+@yield('content')
+
+</body>
 <!-- HEADER -->
 <header class="flex items-center justify-between p-4 bg-white border-b shadow">
   <!-- Logo -->
@@ -22,8 +31,8 @@ const cartCount = ref(0)
 
   <!-- Navigation -->
   <nav class="space-x-6 text-sm font-medium text-black">
-    <a href="" class="hover:text-[#f99d20] transition-colors duration-200">Accueil</a>
-    <a href="" class="hover:text-[#f99d20] transition-colors duration-200">Catalogues</a>
+    <a href="#" class="hover:text-[#f99d20] transition-colors duration-200">Accueil</a>
+    <a href="#" class="hover:text-[#f99d20] transition-colors duration-200">Catalogues</a>
     <a href="#" class="hover:text-[#f99d20] transition-colors duration-200">Produits</a>
     <a href="#" class="hover:text-[#f99d20] transition-colors duration-200">Nouveautés</a>
     <a href="#" class="hover:text-[#f99d20] transition-colors duration-200">Contact</a>
@@ -63,6 +72,8 @@ const cartCount = ref(0)
     </div>
   </div>
 </header>
+
+{{--
 <!-- BANNIÈRE -->
 <section class="py-16 text-center text-white bg-gradient-to-r from-purple-500 to-indigo-600">
   <h1 class="mb-2 text-4xl font-bold">Bienvenue sur StyleHub</h1>
@@ -89,6 +100,8 @@ const cartCount = ref(0)
     @endfor
   </div>
 </section>
+>>>>>>> 78d27c09e9e9c9c1b3a4190ed55729ee2e10c46d:resources/views/Base.blade.php
 
 </body>
 </html>
+ --}}
