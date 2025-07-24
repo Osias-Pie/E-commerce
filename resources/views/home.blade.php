@@ -14,6 +14,12 @@
     <span style="color: #f99d20;">Style</span><span class="text-black">Hub</span>
   </div>
 
+  <script setup>
+import { ref } from 'vue'
+
+const cartCount = ref(0)
+</script>
+
   <!-- Navigation -->
   <nav class="space-x-6 text-sm font-medium text-black">
     <a href="#" class="hover:text-[#f99d20] transition-colors duration-200">Accueil</a>
@@ -42,10 +48,14 @@
         <circle cx="9" cy="21" r="1" />
         <circle cx="20" cy="21" r="1" />
       </svg>
-      <span
-        class="absolute flex items-center justify-center w-5 h-5 text-xs text-white bg-black rounded-full -top-2 -right-2 hover:bg-orange-300">
-        4
-      </span>
+    @if ($cartCount > 0)
+    <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+        {{ $cartCount }}
+    </span>
+@endif
+<script>
+    const cartCount = {{ $cartCount ?? 0 }};
+</script>
     </div>
   </div>
 </header>

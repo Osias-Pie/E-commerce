@@ -5,8 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
 Route::get('/home', function () {
-    return view('home');
+    $cartCount = 0; // Ou récupère le vrai nombre d’articles du panier
+
+    return view('home', compact('cartCount'));
 });
+
 
 
 Route::get('/dashboard', function () {
@@ -22,7 +25,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home', compact('cartCount'));
 });
 
 Route::get('/produits', function () {
