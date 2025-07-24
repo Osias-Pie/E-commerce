@@ -56,6 +56,10 @@ const cartCount = ref(0)
 <script>
     const cartCount = {{ $cartCount ?? 0 }};
 </script>
+<span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+    {{ $cartCount ?? 0 }}
+</span>
+
     </div>
   </div>
 </header>

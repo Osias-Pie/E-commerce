@@ -3,13 +3,21 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\CartController;
 
 Route::get('/home', function () {
-    $cartCount = 0; // Ou récupère le vrai nombre d’articles du panier
+    // Étape 1 : On récupère le panier depuis la session (ou un tableau vide s'il n'existe pas)
+    $cart = session()->get('cart', []);
 
+    // Étape 2 : On calcule le total des quantités dans le panier
+    $cartCount = array_sum(array_column($cart, 'quantity'));
+
+    // Étape 3 : On envoie cette valeur à la vue 'home'
     return view('home', compact('cartCount'));
 });
 
+Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart']);
 
 
 Route::get('/dashboard', function () {
