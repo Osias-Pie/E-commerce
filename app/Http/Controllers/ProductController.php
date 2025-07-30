@@ -7,11 +7,11 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    // public function catalogue()
-    // {
-    //     $products = Product::all();
-    //     return view('catalogue', compact('products'));
-    // }
+   public function catalogue()
+{
+    $articles = \App\Models\Product::all(); // ou le modèle que tu utilises
+    return view('catalogue', compact('articles'));
+}
 
 
      public function home ()
@@ -19,10 +19,10 @@ class ProductController extends Controller
         return view ('home');
      }
 
-    public function catalogue ()
-     {
-        return view ('catalogue');
-     }
+    // public function catalogue ()
+    //  {
+    //     return view ('catalogue');
+    //  }
 
      public function contact ()
      {

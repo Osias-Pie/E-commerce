@@ -16,17 +16,19 @@
 <body class="bg-gray-50">
 
 <!-- HEADER -->
-<header class="bg-white border-b shadow">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<header class="fixed top-0 left-0 z-50 w-full bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
         <div class="flex justify-between h-16 items-center">
             <!-- Logo -->
             <div class="flex-shrink-0 text-2xl font-bold">
+                <a href="{{ route('acceuille') }}">
                 <span style="color: #f99d20;">Style</span><span class="text-black">Hub</span>
+                </a>
             </div>
 
             <!-- Navigation Links (Large Screen) -->
             <div class="hidden md:flex space-x-6 text-sm font-medium text-black">
-                <a href="{{ route('acceuille') }}" class="hover:text-[#f99d20] transition-colors duration-200">Accueil</a>
+                <a href="" class="hover:text-[#f99d20] transition-colors duration-200">Accueil</a>
                 <a href="{{ route('catalogue') }}" class="hover:text-[#f99d20] transition-colors duration-200">Catalogues</a>
                 <a href="{{ route('produits') }}" class="hover:text-[#f99d20] transition-colors duration-200">Produits</a>
                 <a href="{{ route('nouveautés') }}" class="hover:text-[#f99d20] transition-colors duration-200">Nouveautés</a>
@@ -34,33 +36,58 @@
             </div>
 
             <!-- Actions -->
-            <div class="hidden md:flex items-center space-x-4">
-                <a href="#" class="px-4 py-1 text-sm text-black transition rounded hover:bg-orange-300 border border-[#f99d20]">Se connecter</a>
-                <a href="#" class="px-4 py-1 text-sm text-black transition bg-orange-400 rounded hover:bg-orange-300 border border-[#f99d20]">Créer un compte</a>
-                <div class="relative">
-                    <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M3 3h2l.4 2M7 13h14l1-7H6.4" />
-                        <circle cx="9" cy="21" r="1" />
-                        <circle cx="20" cy="21" r="1" />
-                    </svg>
-                    @php
-                        $cartCount = $cartCount ?? 0;
-                    @endphp
-                    @if ($cartCount > 0)
-                        <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
-                            {{ $cartCount }}
-                        </span>
-                    @endif
-                </div>
-            </div>
+
+<div class="hidden md:flex items-center space-x-4">
+    @if(Auth::check())
+        <span class="px-4 py-1 text-sm text-black font-semibold">
+            {{ Auth::user()->name }}
+        </span>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="px-4 py-1 text-sm text-black transition rounded hover:bg-orange-300 border border-[#f99d20]">
+                Déconnexion
+            </button>
+        </form>
+    @else
+        <a href="{{ route('login') }}" class="px-4 py-1 text-sm text-black transition rounded hover:bg-orange-300 border border-[#f99d20]">Se connecter</a>
+        <a href="{{ route('register') }}" class="px-4 py-1 text-sm text-black transition bg-orange-400 rounded hover:bg-orange-300 border border-[#f99d20]">Créer un compte</a>
+    @endif
+    <div class="relative">
+        <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M3 3h2l.4 2M7 13h14l1-7H6.4" />
+            <circle cx="9" cy="21" r="1" />
+            <circle cx="20" cy="21" r="1" />
+        </svg>
+        @php
+            $cartCount = $cartCount ?? 0;
+        @endphp
+        @if ($cartCount > 0)
+            <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+                {{ $cartCount }}
+            </span>
+        @endif
+        <div class="relative">
+        <i class="fas fa-shopping-cart text-2xl"></i>
+        <span id="cartCount" class="absolute -top-2 -right-2 bg-[#f99d20] text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
+        </div>
+
+    </div>
+</div>
 
             <!-- Mobile Menu Button -->
             <div class="md:hidden flex items-center">
-                <button id="mobile-menu-button" class="focus:outline-none">
-                    <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
+
+                <button id="mobile-menu-button" class="md:hidden">
+    <!-- Icon Burger -->
+    <svg id="burger-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+    <!-- Icon Close (hidden by default) -->
+    <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+</button>
+
             </div>
         </div>
     </div>
@@ -73,10 +100,33 @@
         <a href="{{ route('nouveautés') }}" class="block text-sm text-black hover:text-[#f99d20]">Nouveautés</a>
         <a href="{{ route('contact') }}" class="block text-sm text-black hover:text-[#f99d20]">Contact</a>
         <div class="flex flex-col space-y-2 pt-4">
-            <a href="#" class="px-4 py-1 text-sm text-black transition rounded hover:bg-orange-300 border border-[#f99d20]">Se connecter</a>
-            <a href="#" class="px-4 py-1 text-sm text-black transition bg-orange-400 rounded hover:bg-orange-300 border border-[#f99d20]">Créer un compte</a>
+            <a href="{{ route('login') }}" class=" w-32 px-2 py-1 text-sm text-black transition rounded hover:bg-orange-300 border border-[#f99d20]">Se connecter</a>
+            <a href="{{ route('register') }}" class=" w-32 px-2 py-1 text-sm text-black transition bg-orange-400 rounded hover:bg-orange-300 border border-[#f99d20]">Créer un compte</a>
         </div>
+
     </div>
+
+
+<script>
+    // On récupère les éléments HTML : le bouton, le menu mobile et les icônes
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const burgerIcon = document.getElementById('burger-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    // Quand on clique sur le bouton menu
+    mobileMenuButton.addEventListener('click', function() {
+        // On affiche ou cache le menu mobile
+        mobileMenu.classList.toggle('hidden');
+
+        // On affiche ou cache l'icône burger (☰)
+        burgerIcon.classList.toggle('hidden');
+
+        // On affiche ou cache l'icône croix (X)
+        closeIcon.classList.toggle('hidden');
+    });
+</script>
+
 </header>
 
 <!-- CONTENU PRINCIPAL -->
@@ -84,16 +134,17 @@
     @yield('content')
 </main>
 
-<script>
+{{-- <script>
     // Toggle mobile menu visibility
     document.getElementById('mobile-menu-button').addEventListener('click', function() {
         document.getElementById('mobile-menu').classList.toggle('hidden');
     });
-</script>
+</script> --}}
+
 
 <!-- FOOTER -->
 <footer class="bg-black text-white mt-12">
-    <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div class="max-w-7xl mx-auto px-5 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
 
         <!-- Logo & Description -->
         <div>
