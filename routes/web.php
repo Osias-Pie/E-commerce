@@ -11,7 +11,7 @@ use App\Http\Controllers\CartController;
 
 Route::get('/', [ProductController::class, 'home'])->name('acceuille');
 
-Route::get('/catalogue', [ProductController::class, 'catalogue'])->name('catalogue');
+// Route::get('/catalogue', [ProductController::class, 'catalogue'])->name('catalogue');
 
 Route::get('/produits', [ProductController::class, 'produits'])->name('produits');
 
@@ -33,4 +33,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+
+
+// Routes CRUD pour les produits
+Route::middleware('auth')->group(function () {
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 });
